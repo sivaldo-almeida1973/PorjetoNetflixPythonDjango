@@ -13,6 +13,13 @@ HomeFilmes Hashflix
     <p> {{ object.descricao }}</p>
     <img src="{{ object.thumb.url }}">
 
+    <h2>Episódios:</h2>
+    {% for episodio in object.episodios.all %}
+    <a href="{{ episodio.video }}">
+        <p>Episodio {{ forloop.counter }}: {{ episodio.titulo }} </p>
+    </a>
+    {% endfor %}
+
 </div>
 {% endblock %}
 
