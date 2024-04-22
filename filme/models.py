@@ -5,14 +5,14 @@ from django.utils import timezone
 
 #tupla com tupla dentro=(categoria)
 LISTA_CATEGORIAS = (
-#inform q vai armazenar o banco dados - inform q vai aparecer para o usuario
+#inform q vai armazenar no banco dados - inform q vai aparecer para o usuario
     ("ANALISES","Análises"),
     ("PROGRAMACAO","Programação"),
     ("APRESENTACAO","Apresentação"),
     ("OUTROS","Outros"),
 )
 
-#criar tabela o filme no banco dados
+#criar tabela o filme no banco dados(tabela)
 
 class Filme(models.Model):
     titulo = models.CharField(max_length=100)
@@ -22,11 +22,18 @@ class Filme(models.Model):
     visualizacoes = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):#funcao que faz aparecer o titulo do filme
+    def __str__(self):#faz aparecer o titulo do filme NO ADMIN
         return self.titulo
 
+#um filme pode ter varios episodios
+#um episodio poder ter apenas 1 filme
 
+#criar episodios(tebela)---------------------------
+class Episodio(models.Model):
+    filme = models.ForeignKey("Filme", related_name="episodios", on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=100)
+    video = models.URLField()
+    def __str__(self):#faz aparecer o titulo do EPISODIO NO ADMIN
+        return self.filme.titulo + "/ " + self.titulo
 
-#criar episodios
-
-#criar usuário
+#criar usuário------------------------------

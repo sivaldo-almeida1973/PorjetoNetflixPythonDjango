@@ -14,7 +14,7 @@
     -Qunatidade de Views
     -Data de ciração
     -Epsodios
-       _videos
+       _videos (link de video)
        -titulos
 
 - Barra de Pesquisa
