@@ -17,6 +17,20 @@ HomeFilmes Hashflix
     <img src="{{ filme.thumb.url }}">
     {% endfor %}
 </div>
+
+<!--exibir lista_filmes_recentes , funcao criada novos_context.py-->
+<div class="py-10">
+    <h2>Novo</h2>
+    {{ lista_filmes_recentes }}
+
+</div>
+<!--exibir lista_filmes_emalta , funcao criada novos_context.py-->
+<div class="py-10">
+    <h2>Em Alta</h2>
+    {{ lista_filmes_emalta }}
+
+</div>
+
 {% endblock %}
 
 <!-- criar uma url para ela na url.py-->
