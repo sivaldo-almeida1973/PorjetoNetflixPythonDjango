@@ -18,6 +18,17 @@ class Detalhesfilme(DetailView):
     model = Filme
     # objec -> 1 item do nosso modelo
 
+#funcao que faz a contagem de acessos
+    def get(self,request, *args, **kwargs):
+        #descobrir qual filme ele esta acessando
+        filme = self.get_object()
+        #somar +1 nas visualizacoes daquele filme
+        filme.visualizacoes += 1
+        #salvar
+        filme.save()
+        return super(Detalhesfilme, self).get(request, *args, **kwargs)#redireciona o usuario para a URL final
+
+
     def get_context_data(self, **kwargs):
         context = super(Detalhesfilme, self).get_context_data(**kwargs)
         #filtrar a minha tabela de filmes pegando os filmes cuja categoria é igual a do filme da página(object)
