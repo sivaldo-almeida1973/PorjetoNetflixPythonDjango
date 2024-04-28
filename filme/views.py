@@ -38,6 +38,9 @@ class Detalhesfilme(DetailView):
         return  context
 
 
+class Pesquisafilme(ListView):
+    template_name = "pesquisa.html"
+    model = Filme
 
 #def homepage(request):     #template
 #  return render(request, "homepage.html")
