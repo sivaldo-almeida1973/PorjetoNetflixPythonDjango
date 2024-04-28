@@ -35,8 +35,6 @@ h1 {
   section {
     width: 100%;
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
     margin: 20px 0;
 
     .item {
@@ -51,27 +49,26 @@ h1 {
     }
 
     a {
-      position: absolute;
+      /* position: absolute; */
       color: #fff;
       text-decoration: none;
       font-size: 6em;
       background:rgb(0,0,0);
-      width: 80px;
-      padding: 20px;
       text-align: center;
       z-index: 1;
 
-      &:nth-of-type(1) {
-        top:0; bottom:0; left:0;
-        background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-      }
-      &:nth-of-type(2) {
-        top:0; bottom:0; right: 0;
-        background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-      }
-
     }
 
+    &>a:first-child {
+      position: absolute;
+        left:0;
+        background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
+      &>a:last-child {
+        position: absolute;
+        right: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
   }
 }
 
@@ -82,8 +79,8 @@ h1 {
   }
 }
 </style>
-{% endblock %}
 
+{% endblock %}
 
 <!--bloco de conteudo-->
 {% block content %}
@@ -113,7 +110,7 @@ h1 {
         </div>
     </section>
 
-
+    <!-- Inicio secao de filmes novos==================-->
     <section class='bg-primary_black flex justify-center py-10'>
         <div class="p-8 w-10/12 relative" >
             <h2 class="text-gray-200 text-2xl font-medium">
@@ -157,37 +154,52 @@ h1 {
 
         </div>
     </section>
+     <!-- Final secao de filmes novos==================-->
+    <section class='bg-primary_black flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative" >
+            <h2 class="text-gray-200 text-2xl font-medium">
+                Em Alta
+            </h2>
+            <div class="wrapper">
+                <!--Paginas secao 1 filme novo-->
+              <section id="section1emalta" class="flex flex-nowrap items-center justify-center space-x-8">
+                     <!--link leva para a secao 2-->
+                <a href="#section2emalta" class="arrow__btn text-6xl page">‹</a>
+                  {% for filme in lista_filmes_emalta %}
+                   {% if forloop.counter < 5 %}    <!--condicao até 4-->
+                  <div class="item h-64 w-1/4 m-4">
+                      <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                        <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                      </a>
+                  </div>
+                    {% endif %}
+                    {% endfor %}
+                    <a href="#section2emalta" class="arrow__btn text-6xl">›</a>
+              </section>
+                {% if lista_filmes_emalta|length > 4  %}    <!--O if serve para dizer quando a secao 2 ira aparecer-->
+                 <!--Paginas secao 2 filme novo-->
+                  <section id="section2emalta" class="flex flex-nowrap items-center justify-center">
+                       <!--link leva para a secao 1-->
+                    <a href="#section1emalta" class="arrow__btn text-6xl">‹</a>
+                     {% for filme in lista_filmes_emalta %}
+                     {% if forloop.counter > 4 %}    <!--condicao maior 4-->
+                      <div class="item h-64 w-1/4 m-4">
+                          <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                            <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                          </a>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    <a href="#section1emalta" class="arrow__btn text-6xl">›</a>
+                  </section>
+                {% endif %}
+            </div>
+
+
+        </div>
+    </section>
 
 </main>
-
-<h2>final bloco conteudo homefilmes</h2>
-<hr>
-
-
-
-<div class="py-10">
-    <h1>Esta é a nossa HomeFilmes</h1>
-    {% for filme in object_list %}
-    <hr>
-        <!--exibir uma variavel do python-->
-    <a href="{% url 'filme:detalhesfilme' filme.pk %}"> <p> {{ filme.titulo }} </p> </a>  <!-- link da imagem que direciona para o filme-->
-    <p> {{ filme.descricao }} </p>
-    <img src="{{ filme.thumb.url }}"> <!-- link das imagens-->
-    {% endfor %}
-</div>
-
-<!--exibir lista_filmes_recentes , funcao criada novos_context.py-->
-<div class="py-10">
-    <h2>Novo</h2>
-    {{ lista_filmes_recentes }}
-
-</div>
-<!--exibir lista_filmes_emalta , funcao criada novos_context.py-->
-<div class="py-10">
-    <h2>Em Alta</h2>
-    {{ lista_filmes_emalta }}
-
-</div>
 
 {% endblock %}
 
