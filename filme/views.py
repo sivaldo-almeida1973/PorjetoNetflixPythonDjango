@@ -37,7 +37,7 @@ class Detalhesfilme(DetailView):
         context["filmes_relacionados"] = filmes_relacionados
         return  context
 
-
+#pagina construida dentro de filme/templates
 class Pesquisafilme(ListView):
     template_name = "pesquisa.html"
     model = Filme
