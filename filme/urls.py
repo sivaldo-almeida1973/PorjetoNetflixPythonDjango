@@ -8,7 +8,7 @@ from .views import Homefilmes, Homepage, Detalhesfilme, Pesquisafilme
 app_name='filme'
 
 
-
+#criando url das paginas
 urlpatterns = [
    path('', Homepage.as_view(), name='homepage'),
    path('filmes/', Homefilmes.as_view(), name='homefilmes'),

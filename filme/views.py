@@ -42,6 +42,16 @@ class Pesquisafilme(ListView):
     template_name = "pesquisa.html"
     model = Filme
 
+    #função que vai filtrar o curso pelo nome
+    def get_queryset(self):
+        termo_pesquisa = self.request.GET.get('query')
+        if termo_pesquisa:
+            object_list = self.model.objects.filter(titulo__icontains=termo_pesquisa)
+            return object_list
+        else:
+            return None
+
+
 #def homepage(request):     #template
 #  return render(request, "homepage.html")
 

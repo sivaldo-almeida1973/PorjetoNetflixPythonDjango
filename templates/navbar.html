@@ -10,10 +10,10 @@
 
     <div class="w-6/12 flex flex-no-wrap justify-end">  <!--inicio da div com botoes-->
         
-        <div class="mr-2">
-            <form method="get" action="{% url 'filme:pesquisafilme' %}">
-                <input type="text" class="py-1 px-2 rouded-md text-black" name="query" placeholder="Pesquiar...">
-                <input type="submit" value="">
+        <div class="mr-2"> <!--codigo que redireciona a pesquisa para a url da pagina pesquisafilme-->
+            <form method="get" action="{% url 'filme:pesquisafilme' %}">               <!--esse value mantem o nome pesquisado avista-->
+                <input type="text" class="py-1 px-2 rouded-md text-black" name="query" value="{{ request.GET.query }}" placeholder="Pesquiar...">
+                <input type="submit" value=""><!--como se fossse um botão que envia a informação-->
             </form>
 
         </div>
