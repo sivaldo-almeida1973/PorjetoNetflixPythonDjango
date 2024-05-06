@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractUser    #vai permitir criar os usuarios
+from django.contrib.auth.models import AbstractUser
+#vai permitir criar os usuarios
 
 # Create your models here.
 
@@ -37,8 +38,9 @@ class Episodio(models.Model):
     def __str__(self):#faz aparecer o titulo do EPISODIO NO ADMIN
         return self.filme.titulo + "/ " + self.titulo
 
-#criar usuário------------------------------
-class Usuario(AbstractUser):
-    filmes_vistos = models.ManyToManyField("Filme")    #muitos pra muitos
+#criar classe usuário-----------------------------
+class Usuario(AbstractUser): #relacao muitos pra muitos-
+    filmes_vistos = models.ManyToManyField("Filme")
+    #filmes_vistos sao itens da classe Filme
 
 #sempre que criar uma nova classe , adicionar no admin.py
