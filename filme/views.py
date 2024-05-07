@@ -26,6 +26,8 @@ class Detalhesfilme(DetailView):
         filme.visualizacoes += 1
         #salvar
         filme.save()
+        usuario = request.user
+        usuario.filmes_vistos.add(filme)
         return super(Detalhesfilme, self).get(request, *args, **kwargs)#redireciona o usuario para a URL final
 
 
