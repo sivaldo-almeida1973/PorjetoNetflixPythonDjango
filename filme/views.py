@@ -1,19 +1,19 @@
 from django.shortcuts import render
 from .models import Filme
 from django.views.generic import TemplateView, ListView , DetailView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.-----------------------------------
 class Homepage(TemplateView):
     template_name = "homepage.html"
 
-class Homefilmes(ListView):#vai exibir lista de filmes do banco dados
+class Homefilmes(LoginRequiredMixin, ListView):#vai exibir lista de filmes do banco dados
     template_name = "homefilmes.html"
     model = Filme
     # object_list ->lista de itens do modelo
 
 #classe que vai mostrar os detalhes dos filmes
-class Detalhesfilme(DetailView):
+class Detalhesfilme(LoginRequiredMixin, DetailView):
     template_name = "detalhesfilme.html"
     model = Filme
     # objec -> 1 item do nosso modelo
@@ -40,7 +40,7 @@ class Detalhesfilme(DetailView):
         return  context
 
 #pagina construida dentro de filme/templates
-class Pesquisafilme(ListView):
+class Pesquisafilme(LoginRequiredMixin, ListView):
     template_name = "pesquisa.html"
     model = Filme
 

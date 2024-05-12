@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<!--importa a base.html-->
+{% extends 'base.html' %}
+
+{% load static %} <!--para chamar a imagem-->
+
+{% block titulo %}
+Fazer Login
+{% endblock %}
+
+{% block content %}
+ Pagina de Login
+{% endblock %}
