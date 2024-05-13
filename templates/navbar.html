@@ -9,32 +9,38 @@
     </div>
 
     <div class="w-6/12 flex flex-no-wrap justify-end">  <!--inicio da div com botoes-->
-        
+          {% if user.is_authenticated %}
         <div class="mr-2"> <!--codigo que redireciona a pesquisa para a url da pagina pesquisafilme-->
             <form method="get" action="{% url 'filme:pesquisafilme' %}">               <!--esse value mantem o nome pesquisado avista-->
-                <input type="text" class="py-1 px-2 rouded-md text-black" name="query" value="{{ request.GET.query }}" placeholder="Pesquiar...">
+                <input type="text" class="py-1 px-2 rouded-md text-black" name="query" value="{{ request.GET.query }}" placeholder="Pesqusiar...">
                 <input type="submit" value=""><!--como se fossse um botão que envia a informação-->
             </form>
-
         </div>
+        {% endif %}
          <div class="mr-2">
+              {% if user.is_authenticated %}
+               <a>
+                 <button class="bg-red-600 text-white py-1 px-3 rounded-md">
+                 Sair
+              </button>
+            </a>
+             {% else %}
             <a>
                  <button class="bg-red-600 text-white py-1 px-3 rounded-md">
                  Login
               </button>
             </a>
-
+             {% endif %}
         </div>
-
+         {% if user.is_authenticated %}
          <div class="mr-2">
-             <a>
+             <a href="#">
                   <button class="bg-red-600 text-white py-1 px-3 rounded-md">
                   Editar Perfil
                   </button>
              </a>
-
         </div>
-
+         {% endif %}
      </div>    <!--fim da div com botoes-->
 
 
