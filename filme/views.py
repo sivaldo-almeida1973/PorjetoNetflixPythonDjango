@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .models import Filme
-from django.views.generic import TemplateView, ListView , DetailView
+from .forms import CriarContaForm
+from django.views.generic import TemplateView, ListView , DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.-----------------------------------
@@ -64,8 +65,18 @@ class Pesquisafilme(LoginRequiredMixin, ListView):
 class Paginaperfil(LoginRequiredMixin, TemplateView):
     template_name = "editarperfil.html"
 
-class Criarconta(TemplateView):
+#esse formul criar um usuario no banco de dados
+class Criarconta(FormView):
     template_name = "criarconta.html"
+    form_class = CriarContaForm
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('filme:login')
+
 
 #def homepage(request):     #template
 #  return render(request, "homepage.html")
