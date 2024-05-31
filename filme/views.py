@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from .models import Filme, Usuario
 from .forms import CriarContaForm, FormHomepage
-from django.views.generic import TemplateView, ListView , DetailView, FormView
+from django.views.generic import TemplateView, ListView , DetailView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -70,8 +70,13 @@ class Pesquisafilme(LoginRequiredMixin, ListView):
         else:
             return None
 
-class Paginaperfil(LoginRequiredMixin, TemplateView):
+class Paginaperfil(LoginRequiredMixin, UpdateView):#editar perfil
     template_name = "editarperfil.html"
+    model = Usuario #tabela Usuario
+    fields = ['first_name','last_name','email'] #o que vai poder alterar
+
+    def get_success_url(self):
+        return reverse('filme:homefilmes')#redirecionar
 
 #esse formul criar um usuario no banco de dados
 class Criarconta(FormView):
