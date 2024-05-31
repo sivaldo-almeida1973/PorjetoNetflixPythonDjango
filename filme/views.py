@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, reverse
-from .models import Filme
-from .forms import CriarContaForm
+from .models import Filme, Usuario
+from .forms import CriarContaForm, FormHomepage
 from django.views.generic import TemplateView, ListView , DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 # Create your views here.-----------------------------------
-class Homepage(TemplateView):
+class Homepage(FormView):
     template_name = "homepage.html"
+    form_class = FormHomepage
 
     def get(self, request, *args, **kwargs):
          if request.user.is_authenticated:
@@ -14,7 +16,13 @@ class Homepage(TemplateView):
            return redirect('filme:homefilmes')
          else:
              return super().get(request, *args, **kwargs)  #redireciona para a homepage
-
+    def get_success_url(self):
+        email = self.request.POST.get("email")
+        usuarios = Usuario.objects.filter(email=email)
+        if usuarios:
+            return reverse('filme:login')
+        else:
+            return reverse('filme:criarconta')
 
 class Homefilmes(LoginRequiredMixin, ListView):#vai exibir lista de filmes do banco dados
     template_name = "homefilmes.html"
