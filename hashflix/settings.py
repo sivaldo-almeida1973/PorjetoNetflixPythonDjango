@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-#esta dando erro
+
 # Application definition
 
 INSTALLED_APPS = [
